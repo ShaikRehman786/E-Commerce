@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1 align="center">E-Commerce Store 🛒</h1>
 
 ![Demo App](/frontend/public/screenshot-for-readme.png)
@@ -57,3 +58,6 @@ npm run build
 ```shell
 npm run start
 ```
+=======
+# E-Commerce
+>>>>>>> f7de503eb95f31449d43612aff525ba73fc1f662
