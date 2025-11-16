@@ -20,13 +20,17 @@ const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
 
-// ⭐ ADD THIS — MOST IMPORTANT ⭐
+
 app.use(
-	cors({
-		origin: "http://localhost:5173", // VITE FRONTEND
-		credentials: true,              // allow cookies
-	})
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://e-commerce-six-iota-95.vercel.app"
+    ],
+    credentials: true,
+  })
 );
+
 
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
