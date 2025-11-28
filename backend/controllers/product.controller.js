@@ -34,22 +34,24 @@ export const getFeaturedProducts = async (req, res) => {
 // ---------------- CREATE PRODUCT ----------------
 export const createProduct = async (req, res) => {
     try {
-        const { name, description, price, image, category } = req.body;
+        const { name, description, price, image, imageUrl, category } = req.body;
 
-        let imgUrl = "";
+        let cloudinaryUrl = "";
 
+        // If admin uploaded an image
         if (image) {
             const uploaded = await cloudinary.uploader.upload(image, {
                 folder: "products",
             });
-            imgUrl = uploaded.secure_url;
+            cloudinaryUrl = uploaded.secure_url;
         }
 
         const product = await Product.create({
             name,
             description,
             price,
-            image: imgUrl,
+            image: cloudinaryUrl, // cloudinary upload
+            imageUrl,             // pasted URL
             category,
         });
 
@@ -58,6 +60,8 @@ export const createProduct = async (req, res) => {
         res.status(500).json({ message: "Server error", error: error.message });
     }
 };
+
+
 
 // ---------------- DELETE PRODUCT ----------------
 export const deleteProduct = async (req, res) => {

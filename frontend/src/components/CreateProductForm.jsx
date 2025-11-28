@@ -6,13 +6,26 @@ import { useProductStore } from "../stores/useProductStore";
 const categories = ["jeans", "t-shirts", "shoes", "glasses", "jackets", "suits", "bags"];
 
 const CreateProductForm = () => {
-	const [newProduct, setNewProduct] = useState({
-		name: "",
-		description: "",
-		price: "",
-		category: "",
-		image: "",
-	});
+
+const [newProduct, setNewProduct] = useState({
+	name: "",
+	description: "",
+	price: "",
+	category: "",
+	image: "",
+	imageUrl: "", // ✅ ADD THIS
+});
+
+
+
+	// const [newProduct, setNewProduct] = useState({
+	// 	name: "",
+	// 	description: "",
+	// 	price: "",
+	// 	category: "",
+	// 	image: "",
+	// });
+
 
 	const { createProduct, loading } = useProductStore();
 
@@ -135,6 +148,23 @@ const CreateProductForm = () => {
 					</label>
 					{newProduct.image && <span className='ml-3 text-sm text-gray-400'>Image uploaded </span>}
 				</div>
+
+
+				<div>
+  <label className='block text-sm font-medium text-gray-300 mt-4'>
+    Or Paste Image URL
+  </label>
+  <input
+    type='text'
+    placeholder='Paste image URL here'
+    value={newProduct.imageUrl}
+    onChange={(e) =>
+      setNewProduct({ ...newProduct, imageUrl: e.target.value })
+    }
+    className='mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500'
+  />
+</div>
+
 
 				<button
 					type='submit'

@@ -7,6 +7,7 @@ const productSchema = new mongoose.Schema(
         price: { type: Number, min: 0, required: true },
         image: { type: String, default: "" }, // FIXED
         category: { type: String, required: true },
+        imageUrl : { type : String, default: "" },
         isFeatured: { type: Boolean, default: false },
     },
     { timestamps: true }
