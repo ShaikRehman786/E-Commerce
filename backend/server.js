@@ -34,6 +34,8 @@ app.use(
 
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 
 // routes
 app.use("/api/auth", authRoutes);
