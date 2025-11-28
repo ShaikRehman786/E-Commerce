@@ -36,30 +36,35 @@ export const createProduct = async (req, res) => {
     try {
         const { name, description, price, image, imageUrl, category } = req.body;
 
-        let cloudinaryUrl = "";
+        let finalImage = "";
 
-        // If admin uploaded an image
+        // Case 1: Uploaded image (base64 → Cloudinary)
         if (image) {
             const uploaded = await cloudinary.uploader.upload(image, {
                 folder: "products",
             });
-            cloudinaryUrl = uploaded.secure_url;
+            finalImage = uploaded.secure_url;
+        }
+        // Case 2: Pasted image URL
+        else if (imageUrl) {
+            finalImage = imageUrl;
         }
 
         const product = await Product.create({
             name,
             description,
             price,
-            image: cloudinaryUrl, // cloudinary upload
-            imageUrl,             // pasted URL
+            image: finalImage, 
             category,
         });
 
         res.status(201).json(product);
     } catch (error) {
+        console.error("Create product error:", error);
         res.status(500).json({ message: "Server error", error: error.message });
     }
 };
+
 
 
 
