@@ -7,9 +7,6 @@ const ProductCard = ({ product }) => {
 	const { user } = useUserStore();
 	const { addToCart } = useCartStore();
 
-	// ✅ DEFINE BASE URL HERE (outside JSX)
-	const BASE_URL = import.meta.env.VITE_API_URL || "https://e-commerce-nque.onrender.com";
-
 	const handleAddToCart = () => {
 		if (!user) {
 			toast.error("Please login to add products to cart", { id: "login" });
@@ -24,7 +21,7 @@ const ProductCard = ({ product }) => {
 			<div className='relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl'>
 				<img
 					className='object-cover w-full'
-					src={`${BASE_URL}${product.image}`}
+					src={product.image}   // ✅ DIRECT CLOUDINARY URL
 					alt='product image'
 				/>
 				<div className='absolute inset-0 bg-black bg-opacity-20' />
